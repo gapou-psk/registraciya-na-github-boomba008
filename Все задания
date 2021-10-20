@@ -1,0 +1,128 @@
+Сентябрь 
+1 задание 
+SELECT * FROM billing WHERE payer_email = 'vasya@mail.com';
+
+2 задание
+INSERT INTO billing VALUES (
+	'pasha@mail.com',
+    'katya@mail.com',
+    '300.00', 'EUR',
+    '2016-02-14',
+    'Valentines day present');
+SELECT * FROM billing WHERE payer_email = 'pasha@mail.com';
+
+3 задание
+UPDATE billing SET payer_email = 'igor@mail.com' WHERE payer_email = 'alex@mail.com';
+
+4 задание 
+USE billing;
+DELETE FROM billing
+WHERE payer_email= '' or recipient_email='';
+
+5 задание
+USE project_simple;
+SELECT count(project_name) FROM project
+
+6 задание 
+USE project_simple;
+SELECT category, COUNT(product_name) FROM store GROUP BY category;
+
+7 задание
+USE store_simple;
+SELECT category, count(category), Max(price) FROM store
+GROUP BY price
+ORDER by price desc LIMIT 5;
+
+8 задание 
+
+USE project_simple;
+SELECT count(project_name), sum(budget), avg(datediff(project_start, project_finish)) FROM project
+
+Задание за октябрь 
+
+1 задание
+SELECT good.name, category.name 
+FROM category_has_good
+INNER JOIN good 
+ON category_has_good.good_id = good.id
+INNER JOIN category
+ON category_has_good.category_id = category.id
+ORDER BY good.name, category.name;
+
+2 задание 
+
+SELECT client.first_name, client.last_name, count(1) AS new_sale_num FROM client
+INNER JOIN sale ON client.id = sale.client_id
+INNER JOIN status ON sale.status_id = status.id WHERE status.name = "new"
+GROUP BY client.first_name, client.last_name;
+
+3 задание 
+
+SELECT good.name, category.name FROM good
+LEFT OUTER JOIN category_has_good ON good.id = category_has_good.good_id
+LEFT OUTER JOIN category ON category.id = category_has_good.category_id;
+
+4 задание 
+SELECT good.name, category.name FROM good
+LEFT OUTER JOIN category_has_good ON good.id = category_has_good.good_id
+LEFT OUTER JOIN category ON category.id = category_has_good.category_id
+UNION
+SELECT good.name, category.name FROM good
+RIGHT OUTER JOIN category_has_good ON good.id = category_has_good.good_id
+RIGHT OUTER JOIN category ON category.id = category_has_good.category_id;
+
+5 задание 
+
+SELECT source.name, sum(sale.sale_sum) FROM source
+LEFT OUTER JOIN client ON source.id = client.source_id
+LEFT OUTER JOIN sale ON client.id = sale.client_id
+GROUP BY source.name;
+
+6 задание 
+
+SELECT good.name FROM good
+INNER JOIN category_has_good ON good.id = category_has_good.good_id
+INNER JOIN category ON category.id = category_has_good.category_id WHERE category.name = "Cakes"
+UNION
+SELECT good.name FROM good
+INNER JOIN sale_has_good ON good.id = sale_has_good.good_id
+INNER JOIN sale ON sale.id = sale_has_good.sale_id
+INNER JOIN status ON status.id = sale.status_id WHERE status.name = "delivering";
+
+7 задание 
+
+SELECT category.name, count(sale.id) FROM category
+LEFT OUTER JOIN category_has_good ON category.id = category_has_good.category_id
+LEFT OUTER JOIN good ON good.id = category_has_good.good_id
+LEFT OUTER JOIN sale_has_good ON good.id = sale_has_good.good_id
+LEFT OUTER JOIN sale ON sale.id = sale_has_good.sale_id
+GROUP BY category.name;
+
+
+
+18.10.2021
+1
+create table book (book_id int primary key auto_increment,
+title varchar(50), author varchar(30),
+price decimal(8,2),
+amount int);
+
+
+2
+insert into book (book_id, title, author, price, amount) 
+values (1, "Мастер и Маргарита", "Булгаков М.А.", 670.99, 3)
+
+
+3
+
+insert into book (book_id, title, author, price, amount) values (2, "Белая гвардия", "Булгаков М.А.",540.50, 5);
+insert into book (book_id, title, author, price, amount) values (3, "Идиот", "Достоевский Ф.М.",460.00, 10);
+insert into book (book_id, title, author, price, amount) values (4, "Братья Карамазовы", "Достоевский Ф.М.",799.01, 2);
+
+
+
+
+
+
+
+
